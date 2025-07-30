@@ -1,8 +1,8 @@
-import { type SharedData } from '@/types'
-import { Head, Link, usePage } from '@inertiajs/react'
+import { Head } from '@inertiajs/react'
 import MainLayout from '@/layouts/main-layout'
 import Posts from '@/components/posts'
 import { type PostListing } from '@/types/posts'
+import PostFilter from '@/components/post-filter'
 
 type IndexProps = {
   posts: PostListing[]
@@ -15,6 +15,7 @@ export default function Index({
     <>
       <Head title="WiseJobs - Wise Jobs For Wise People" />
       <MainLayout>
+        <PostFilter />
         <Posts posts={posts} />
       </MainLayout>
     </>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use App\Constants\PostConstants;
 use App\Repositories\PostRepository;
+use App\Http\Requests\Posts\GetPostsRequest;
 
 class PostController extends Controller
 {
@@ -13,10 +15,22 @@ class PostController extends Controller
         protected PostRepository $postRepository
     ){}
 
-    public function index(Request $request)
+    public function index(GetPostsRequest $request)
     {
         return Inertia::render('posts/index', [
-            'posts' => $this->postRepository->getAllWithCompany()
+            'posts' => $this
+                ->postRepository
+                ->setSearch($request->search)
+                ->setFilters([
+                    'min_salary' => $request->minSalary,
+                    'type' => $request->postType,
+                ])
+                ->getAllWithCompany(),
+            'filters' => [
+                'search' => $request->input('search', ''),
+                'minSalary' => $request->input('minSalary', 0),
+                'postType' => $request->input('postType', PostConstants::ANY),
+            ],
         ]);
     }
 }

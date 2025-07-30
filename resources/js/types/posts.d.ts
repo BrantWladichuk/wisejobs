@@ -14,3 +14,4 @@ export type PostListing = {
   company: Company
 }
 
+export type PostTypes = 'any' | 'in-person' | 'remote'
