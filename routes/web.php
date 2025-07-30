@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Middleware\Admin;
 
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
+Route::get('/job/{id}', [PostController::class, 'show'])->name('posts.show');
 
 Route::middleware(Admin::class)->group(function () {
     Route::get('dashboard', function () {

@@ -63,4 +63,15 @@ class PostRepository
                 }
             ])->get();
     }
+
+    /**
+     * Get a single post by ID.
+     *
+     * @param int $id
+     * @return \App\Models\Post|null
+     */
+    public function getById(int $id): ?Post
+    {
+        return Post::with('company')->find($id);
+    }
 }

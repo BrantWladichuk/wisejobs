@@ -20,7 +20,7 @@ class PostFactory extends Factory
         return [
             'company_id' => Company::factory(),
             'title' => $this->faker->jobTitle,
-            'body' => $this->faker->paragraphs(3, true),
+            'body' => nl2br($this->faker->paragraphs(5, true)),
             'salary' => $this->faker->numberBetween(30000, 120000),
             'type' => $this->faker->randomElement(['remote', 'in-person']),
             'location' => $this->faker->city,

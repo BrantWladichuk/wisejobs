@@ -1,19 +1,9 @@
 import { type PostListing } from '@/types/posts'
 import { Link } from '@inertiajs/react'
+import { formatSalary, formatType } from '@/lib/utils'
 
 type PostProps = {
   post: PostListing
-}
-
-const formatSalary = (salary: number) => {
-  return salary.toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }) + '/yr'
-}
-
-const formatType = (type: string) => {
-  return type.replace(/-/gi," ")
 }
 
 export default ({
