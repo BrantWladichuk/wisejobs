@@ -7,7 +7,6 @@ import { type BreadcrumbItem } from '@/types';
 import AppLayout from '@/layouts/app-layout';
 import CompaniesLayout from '@/layouts/companies/layout';
 import { type CompanyListing } from '@/types/companies';
-import CompaniesList from '@/components/companies-list';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -26,7 +25,6 @@ export default function CompaniesIndex({
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title="Companies" />
-
       <CompaniesLayout>
         <div className="space-y-6">
           {companies.map(company => (
