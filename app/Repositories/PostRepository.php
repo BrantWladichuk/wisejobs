@@ -74,4 +74,57 @@ class PostRepository
     {
         return Post::with('company')->find($id);
     }
+
+    /**
+     * Get posts by company ID.
+     */
+    public function getPostsByCompanyId(int $company_id): Collection
+    {
+        return Post::query()
+            ->where('company_id', $company_id)
+            ->select('id', 'title', 'salary', 'location', 'type', 'created_at')
+            ->with('company:id,name')
+            ->get();
+    }
+
+    /**
+     * Create a new post.
+     *
+     * @param array $data
+     * @return \App\Models\Post
+     */
+    public function create(array $data): Post
+    {
+        return Post::create($data);
+    }
+
+    /**
+     * Update an existing post.
+     *
+     * @param int $id
+     * @param array $data
+     * @return \App\Models\Post
+     */
+    public function update(int $id, array $data): Post
+    {
+        if($post = $this->getById($id)) {
+            $post->update($data);
+        }
+
+        return $post;
+    }
+
+    /**
+     * Delete a post by ID.
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function delete(int $id): bool
+    {
+        if($post = $this->getById($id)) {
+            return $post->delete();
+        }
+        return false;
+    }
 }

@@ -43,6 +43,17 @@ class CompanyRepository
     }
 
     /**
+     * Get a company by its ID with its posts.
+     * 
+     * @param int $company_id
+     * @return \App\Models\Company|null
+     */
+    public function getWithPostsById(int $company_id): ?Company
+    {
+        return Company::with('posts')->find($company_id);
+    }
+
+    /**
      * Update a company.
      *
      * @param int $id
