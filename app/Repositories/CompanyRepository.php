@@ -18,4 +18,57 @@ class CompanyRepository
             ->select('id', 'name', 'created_at')
             ->get();
     }
+
+    /**
+     * Create a new company.
+     *
+     * @param array $data
+     * @return \App\Models\Company
+     */
+    public function create(array $data): Company
+    {
+        return Company::create($data);
+    }
+
+    /**
+     * Find a company by its ID.
+     *
+     * @param int $id
+     * @return \App\Models\Company|null
+     */
+    public function getById(int $id): ?Company
+    {
+        return Company::find($id);
+    }
+
+    /**
+     * Update a company.
+     *
+     * @param int $id
+     * @param array $data
+     * @return \App\Models\Company
+     */
+    public function update(int $id, array $data): Company
+    {
+        if($company = $this->getById($id)) {
+            $company->update($data);
+        }
+
+        return $company;
+    }
+
+    /**
+     * Delete a company.
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function delete(int $id): bool
+    {
+        if($company = $this->getById($id)) {
+            return $company->delete();
+        }
+
+        return false;
+    }
 }
