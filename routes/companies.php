@@ -4,8 +4,6 @@ use Inertia\Inertia;
 use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\Settings\ProfileController;
-use App\Http\Controllers\Settings\PasswordController;
 
 Route::middleware(Admin::class)
     ->prefix('admin/companies')
