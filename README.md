@@ -14,4 +14,7 @@ Admin account:
 e: `wiseguy@wisejobs.com`
 p: `w1$3j0b$`
 
+Live:
+`https://wisejobs-main-svhf5h.laravel.cloud/`
 
+Please note: The first time loading the live example might be slow due to the server hibernating. 
