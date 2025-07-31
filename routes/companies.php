@@ -3,7 +3,7 @@
 use Inertia\Inertia;
 use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\Admin\CompanyController;
 
 Route::middleware(Admin::class)
     ->prefix('admin/companies')
