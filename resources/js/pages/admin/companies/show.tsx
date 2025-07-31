@@ -1,16 +1,8 @@
 import { Head } from '@inertiajs/react'
-import { type BreadcrumbItem } from '@/types'
-import AppLayout from '@/layouts/app-layout'
-import CompaniesLayout from '@/layouts/companies/layout'
 import { useForm } from '@inertiajs/react'
-import { Transition } from '@headlessui/react'
-
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: 'Companies',
-    href: '/admin/companies',
-  },
-];
+import AdminLayout from '@/layouts/admin-layout'
+import { Link } from '@inertiajs/react'
+import Back from '@/components/back'
 
 type FormData = {
   name: string;
@@ -28,58 +20,56 @@ type CompaniesShowProps = {
 export default function CompaniesShow({
   company
 }: CompaniesShowProps) {
-  const { data, setData, put, delete: destroy, processing, recentlySuccessful } = useForm<FormData>({
+  const { data, setData, put, delete: destroy, processing } = useForm<FormData>({
     name: company.name,
     website: company.website
   })
+  const handleDelete = () => {
+    if (confirm('Are you sure you want to delete this company and all it\'s job postings? This action cannot be undone.')) {
+      destroy(route('companies.destroy', { id: company.id }))
+    }
+  }
   return (
-    <AppLayout breadcrumbs={breadcrumbs}>
+    <AdminLayout>
       <Head title="Companies" />
-      <CompaniesLayout>
-        <div className="space-y-6">
+      <div className="space-y-6">
+        <Back href={route('companies.index')} text="All companies" />
+        <div className='flex items-center justify-between mb-4'>
           <h1 className="text-2xl font-semibold">{company.name}</h1>
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            put(route('companies.save', { id: company.id }))
-          }}>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Company Name</label>
-              <input
-                type="text"
-                value={data.name}
-                onChange={(e) => setData('name', e.target.value)}
-                className="border rounded px-4 py-2 w-full mb-4"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Website</label>
-              <input
-                type="url"
-                value={data.website}
-                onChange={(e) => setData('website', e.target.value)}
-                className="border rounded px-4 py-2 w-full mb-4"
-              />
-            </div>
-            <div className='flex items-center justify-between'>
-              <button type="submit" disabled={processing} className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                Save
-              </button>
-              <button type="button" onClick={() => destroy(route('companies.destroy', { id: company.id }))} className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
-                Delete
-              </button>
-            </div>
-            <Transition
-              show={recentlySuccessful}
-              enter="transition ease-in-out"
-              enterFrom="opacity-0"
-              leave="transition ease-in-out"
-              leaveTo="opacity-0"
-          >
-              <p className="text-sm text-neutral-600 mt-4">Saved</p>
-          </Transition>
-          </form>
+          <Link href={route('posts.index', { company_id: company.id })} className='text-blue-500 text-sm'>Job postings</Link>
         </div>
-      </CompaniesLayout>
-    </AppLayout>
-  );
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          put(route('companies.save', { id: company.id }))
+        }}>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Company Name</label>
+            <input
+              type="text"
+              value={data.name}
+              onChange={(e) => setData('name', e.target.value)}
+              className="border rounded px-4 py-2 w-full mb-4"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Website</label>
+            <input
+              type="url"
+              value={data.website}
+              onChange={(e) => setData('website', e.target.value)}
+              className="border rounded px-4 py-2 w-full mb-4"
+            />
+          </div>
+          <div className='flex items-center justify-between'>
+            <button type="submit" disabled={processing} className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+              Save
+            </button>
+            <button type="button" onClick={handleDelete} className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+              Delete
+            </button>
+          </div>
+        </form>
+      </div>
+    </AdminLayout>
+  )
 }
