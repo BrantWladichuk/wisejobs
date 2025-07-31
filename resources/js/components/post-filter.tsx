@@ -11,7 +11,7 @@ export default () => {
   return (
     <div>
       <input
-        value={search}
+        value={search || ''}
         onChange={(e) => updateSearch(e.target.value)}
         autoFocus
         type="text" 
