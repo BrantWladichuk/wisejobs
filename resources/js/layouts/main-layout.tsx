@@ -36,14 +36,19 @@ export default ({ children, asAdmin = false }: PropsWithChildren<MainLayoutProps
                   Admin
                 </Link>
               )}
-              <AppearanceToggleTab />
             </div>
           </div>
         </div>
       </nav>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-screen'>
         {children}
       </div>
+      <footer className='bg-gray-800 py-8'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
+          <p className='text-white mb-4'>&copy; {new Date().getFullYear()} WiseJobs. All rights reserved.</p>
+          <AppearanceToggleTab />
+        </div>
+      </footer>
     </>
   )
 }
