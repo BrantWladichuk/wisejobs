@@ -63,8 +63,8 @@ export default function Index({
             type="text" 
             placeholder="Search by job title, company, or location" 
             className="border rounded px-4 py-2 w-full mb-4" />
-          <div className="flex justify-between mb-4">
-            <div className={cn('inline-flex gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800')}>
+          <div className="flex flex-col md:flex-row justify-between mb-4">
+            <div className={cn('inline-flex gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800 mb-4 md:mb-0')}>
               {tabs.map(({ value, label }) => (
                 <button
                   key={value}
@@ -79,20 +79,18 @@ export default function Index({
                 </button>
               ))}
             </div>
-            <div className="flex items-center gap-2">
-              <select
-                value={filters.minSalary}
-                onChange={(e) => setData('minSalary', parseInt(e.target.value))}
-                className="border rounded px-4 py-2">
-                  <option value={0}>No Minimum Salary</option>
-                  <option value={30000}>$30,000+</option>
-                  <option value={50000}>$50,000+</option>
-                  <option value={70000}>$70,000+</option>
-                  <option value={100000}>$100,000+</option>
-                  <option value={150000}>$150,000+</option>
-                  <option value={200000}>$200,000+</option>
-              </select>
-            </div>
+            <select
+              value={filters.minSalary}
+              onChange={(e) => setData('minSalary', parseInt(e.target.value))}
+              className="border rounded px-4 py-2">
+                <option value={0}>No Minimum Salary</option>
+                <option value={30000}>$30,000+</option>
+                <option value={50000}>$50,000+</option>
+                <option value={70000}>$70,000+</option>
+                <option value={100000}>$100,000+</option>
+                <option value={150000}>$150,000+</option>
+                <option value={200000}>$200,000+</option>
+            </select>
           </div>
         </div>
         <Posts posts={posts} />

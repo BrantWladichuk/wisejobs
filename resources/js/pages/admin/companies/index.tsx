@@ -22,7 +22,7 @@ export default function CompaniesIndex({
       <div className="space-y-6">
         {companies.map(company => (
           <div key={company.id} className="p-4 border rounded-md inline-block w-full hover:bg-gray-100 dark:hover:bg-gray-800">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col md:flex-row items-center justify-between">
               <h3 className="text-lg font-semibold">{company.name}</h3>
               <div className='flex items-center space-x-4'>
                 <Link href={route('companies.show', { id: company.id })} className="text-blue-600 hover:underline">
