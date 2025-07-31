@@ -21,7 +21,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return Inertia::render('companies/index', [
+        return Inertia::render('admin/companies/index', [
             'companies' => $this->companyRepository->getAll(),
         ]);
     }
@@ -33,7 +33,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return Inertia::render('companies/create');
+        return Inertia::render('admin/companies/create');
     }
 
     /**
@@ -63,7 +63,7 @@ class CompanyController extends Controller
 
         abort_unless($company, 404, 'Company not found.');
 
-        return Inertia::render('companies/show', compact('company'));
+        return Inertia::render('admin/companies/show', compact('company'));
     }
 
     /**
