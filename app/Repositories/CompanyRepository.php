@@ -16,6 +16,7 @@ class CompanyRepository
     {
         return Company::query()
             ->select('id', 'name', 'created_at')
+            ->withCount('posts')
             ->get();
     }
 

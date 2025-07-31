@@ -25,10 +25,19 @@ export default function CompaniesIndex({
       <CompaniesLayout>
         <div className="space-y-6">
           {companies.map(company => (
-            <Link href={route('companies.show', { id: company.id })} key={company.id} className="p-4 border rounded-md inline-block w-full hover:bg-gray-100 dark:hover:bg-gray-800">
-              <h3 className="text-lg font-semibold">{company.name}</h3>
-              <p className="text-sm text-gray-500">Created at: {new Date(company.created_at).toLocaleDateString()}</p>  
-            </Link>
+            <div key={company.id} className="p-4 border rounded-md inline-block w-full hover:bg-gray-100 dark:hover:bg-gray-800">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold">{company.name}</h3>
+                <div className='flex items-center space-x-4'>
+                  <Link href={route('companies.show', { id: company.id })} className="text-blue-600 hover:underline">
+                    Edit
+                  </Link>
+                  <Link href={route('posts.index', { company_id: company.id })} className="text-blue-600 hover:underline">
+                    Jobs Postings ({company.posts_count})
+                  </Link>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </CompaniesLayout>
